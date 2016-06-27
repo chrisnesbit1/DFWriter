@@ -1,0 +1,60 @@
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>DFWriter - Distraction Free writing saved to your Dropbox</title>
+</head>
+<body>
+
+<textarea id="editor"></textarea>
+</body>
+</html>
+
+<script type="text/javascript" src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+<script type="text/javascript" src="//www.dropbox.com/static/api/2/dropins.js" id="dropboxjs" data-app-key="9744arcr8j1kokv"></script>
+<script type="text/javascript" src="//cdn.tinymce.com/4/tinymce.min.js"></script>
+<script type="text/javascript">
+//tinymce
+tinymce.init({
+  //elements: "editor",
+  selector:"textarea",
+  plugins: ["fullscreen","save"],
+  save_enablewhendirty: true,
+  setup: function(t) {
+    t.on('init', function(args) {
+      console.log('ready');
+
+      tinymce.execCommand("mceFullScreen");
+
+
+//dropbox
+var options = {
+    success: function(files) {
+	var filename = files[0].link.replace("https://www.dropbox.com/s/", "").replace("?dl=0","");
+	//https://www.dropbox.com/s/deqyi4705rdqf7k/peedeegeek.com.txt?dl=0
+	$.get('https://dl.dropboxusercontent.com/1/view/'+filename, function (data) {
+    		console.log(data); // <-- this will log the contents of the file
+	});
+    },
+    cancel: function() {
+
+    },
+    linkType: "preview", // or "direct"
+    multiselect: false, // or true
+    extensions: ['.txt']
+};
+
+var button = Dropbox.createChooseButton(options);
+//document.getElementById("mceu_14-body").appendChild(button);
+
+
+
+
+    });
+  }
+//  oninit: function() {
+//    tinymce.execCommand("mceFullScreen");
+//  }
+ });
+
+</script>
+

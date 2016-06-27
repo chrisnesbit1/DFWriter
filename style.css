@@ -1,0 +1,22 @@
+.widearea-controlPanel {
+}
+textarea {
+/*  width: 100% !important;
+  border: 1px solid red !important;
+  max-width: none !important;*/
+}
+.widearea-icon.close, .widearea-icon.changeTheme {
+  display:none;
+}
+
+img {
+  width: 100px;
+}
+
+.widearea-controlPanel {
+  text-align: right;
+}
+
+.widearea-controlPanel i {
+  padding-right: 12px;
+}
